@@ -6,7 +6,7 @@
         "phpunit/phpunit": "^7.0"
 
     },
-    "autoload-dev": {
+    "autoload": {
         "psr-4": {
             "Huojunhao\\BrowserExtend\\": "src/"
         }
