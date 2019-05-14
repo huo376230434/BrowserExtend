@@ -49,10 +49,15 @@ abstract  class CustomDuskTestBase extends TestCase {
         });
 
         Browser::macro('ensureJquery',function(){
-            $s =  file_get_contents(__DIR__.'/bin/jquery.js');
-            $this->driver->executeScript($s);
-            $js = "window.$=window.jQuery";
-            $this->driver->executeScript($js);
+            if ($this->driver->executeScript("return window.jQuery == null")) {
+
+                $s =  file_get_contents(__DIR__.'/bin/jquery.js');
+                $this->driver->executeScript($s);
+                $js = "window.$=window.jQuery";
+                $this->driver->executeScript($js);
+
+            }
+
             return $this;
 
         });
