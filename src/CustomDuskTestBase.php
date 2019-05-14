@@ -13,7 +13,7 @@ use Laravel\Dusk\TestCase;
 
 abstract  class CustomDuskTestBase extends TestCase {
 
-
+protected $domain;
     public function __construct(?string $name = null, array $data = [], string $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
@@ -26,9 +26,11 @@ abstract  class CustomDuskTestBase extends TestCase {
                 ->pause($pause);
             return $this;
         });
-        Browser::macro('visitAndDelay',function($url,$pause=0.5){
+        $domain = $this->domain;
+        Browser::macro('visitAndDelay',function($url,$pause=0.5)use($domain){
             $pause = $pause * 1000;
 //            dump($pause);
+            $domain && $url = $domain.$url;
             try {
                 $this->visit($url)
                     ->pause($pause)
