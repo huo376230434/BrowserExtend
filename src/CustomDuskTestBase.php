@@ -185,6 +185,19 @@ DDD;
             return $this;
         });
 
+        Browser::macro('currentFullUrl',function(){
+            $js = <<<DDD
+return location.href;
+DDD;
+           $url = $this->driver->executeScript($js);
+           return $url;
+        });
+
+
+        Browser::macro('assertTrue', function ($bool) {
+            \PHPUnit\Framework\Assert::assertTrue($bool);
+        });
+
 
     }
 

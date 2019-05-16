@@ -97,5 +97,22 @@ class Browser{
 
     }
 
+    /**
+     * @return string
+     */
+    public function currentFullUrl()
+    {
+
+        return '';
+    }
+
+    /**
+     * @return Browser
+     */
+    public function assertTrue($bool)
+    {
+
+    }
+
 
 }
