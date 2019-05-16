@@ -13,7 +13,7 @@ use Laravel\Dusk\TestCase;
 
 abstract  class CustomDuskTestBase extends TestCase {
 
-protected $domain;
+    protected $domain;
     public function __construct(?string $name = null, array $data = [], string $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
@@ -174,6 +174,18 @@ DDD;
         });
 
 
-    }
+
+        Browser::macro('select2',function($name,$value){
+            $js = <<<DDD
+$('[name="$name"]').val($value).select2()
+DDD;
+            $this->driver->executeScript($js)
+            ;
+            $this->delay(1);
+            return $this;
+        });
+
 
     }
+
+}

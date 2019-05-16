@@ -89,5 +89,13 @@ class Browser{
 
     }
 
+    /**
+     * @return Browser
+     */
+    public function select2($name,$value)
+    {
+
+    }
+
 
 }
