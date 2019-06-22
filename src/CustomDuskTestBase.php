@@ -167,6 +167,10 @@ DDD;
             }
             $html = str_replace("\n", '', $html);
             $html = addslashes($html);
+
+            $html = str_replace('<code>', "<div>", $html);
+            $html = str_replace('</code>', "</div>", $html);
+
             $this->html($selector, $html);
 //
             foreach ($hidden_selectors as $hidden_selector) {
@@ -184,7 +188,7 @@ DDD;
 
             }
 
-            $this->delay(1000);
+            $this->delay(1);
             return $html;
         });
 

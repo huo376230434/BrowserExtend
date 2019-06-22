@@ -86,6 +86,7 @@ class Browser{
      */
     public function joinHtmlsAndWaitToPrint($selector, $url_arr=[])
     {
+        return '';
 
     }
 
