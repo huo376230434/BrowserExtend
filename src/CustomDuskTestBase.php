@@ -160,16 +160,35 @@ DDD;
 
 
 
-        Browser::macro('joinHtmlsAndWaitToPrint',function($selector,$url_arr=[]){
+        Browser::macro('joinHtmlsAndWaitToPrint',function($selector,$url_arr=[],$hidden_selectors=[],$remove_selectors=[]){
             $html = "";
             foreach ($url_arr as $item) {
                 $html .= $this->visitAndDelay($item)->html($selector);
             }
             $html = str_replace("\n", '', $html);
             $html = addslashes($html);
+
+            $html = str_replace('<code>', "<div>", $html);
+            $html = str_replace('</code>', "</div>", $html);
+
             $this->html($selector, $html);
 //
-            $this->delay(1000);
+            foreach ($hidden_selectors as $hidden_selector) {
+                $js = <<<DDD
+$('$hidden_selector').hide();
+DDD;
+                $this->driver->executeScript($js);
+
+            }
+            foreach ($remove_selectors as $remove_selector) {
+                $js = <<<DDD
+$('$remove_selector').remove();
+DDD;
+                $this->driver->executeScript($js);
+
+            }
+
+            $this->delay(1);
             return $html;
         });
 
